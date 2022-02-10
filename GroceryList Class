@@ -1,0 +1,59 @@
+package Aksh.Kanojia;
+
+import java.util.ArrayList;
+
+public class GroceryList{
+
+    //Declaring ArrayList, it has brackets because it's actually a class
+    private ArrayList<String> groceryList = new ArrayList<>();
+
+    //method to add item to the groceryList
+    public void addGroceryItem(String item){
+        groceryList.add(item);
+    }
+    //method to print the groceryList
+    //.size is a field in java that can tell you the size of any array
+
+    public void printGroceryList(){
+        System.out.println("You have: " + groceryList.size() + " items in your list");
+
+        //for loop that goes from 0 to the amount of items in the groceryList
+        //we must add 1 to i because we don't want to start from 0
+        //.get is a java field that gets the item in that array in position i
+        for(int i=0; i< groceryList.size(); i++){
+            System.out.println(i+1 + ". " + groceryList.get(i));
+        }
+    }
+    //method to modify a grocery item in the groceryList
+    // .set takes the position of what you want to set in the arrayList, and what you want to set it as
+    //we do position+1 because if you remember we did i plus one so that we don't start at 0, everything has moved up one
+
+    public void modifyGroceryItem(int position, String newItem){
+        groceryList.set(position, newItem);
+        System.out.println("Grocery Item " + position+1 + " has been modified");
+    }
+    //method to remove an item in the groceryList
+    //itemNumber is inputted, which is passed into this method as position, and removed
+    public void removeItem(int position){
+        String theItem = groceryList.get(position);
+        groceryList.remove(position);
+    }
+    //method to find and item in the groceryList
+    //searchItem is passed from the main class to this method
+    //.contains sees if the item is in the groceryList or not
+    //if it is contained, it is exists so boolean exists turns true
+
+    public String findItem(String searchItem){
+        boolean exists = groceryList.contains(searchItem);
+
+        //.index of finds the position of the searchItem
+        //if the item is in the list, it means it is there, so we return what position it is at to the main method
+        int position = groceryList.indexOf(searchItem);
+        if(position >= 0){
+            return groceryList.get(position);
+        }
+        return null;
+    }
+
+
+}

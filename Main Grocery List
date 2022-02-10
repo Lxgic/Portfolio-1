@@ -1,0 +1,124 @@
+package Aksh.Kanojia;
+
+import java.util.Scanner;
+
+/*
+Aksh Kanojia
+International School of Toulouse
+IB Computer Science Standard Level
+IA
+
+Grocery List Application
+ */
+
+public class Main {
+    //setting up scanner so we can take in input
+    private static Scanner scanner = new Scanner(System.in);
+    //new object
+    private static GroceryList groceryList = new GroceryList();
+
+    public static void main(String[] args) {
+    //until the user hasn't quit the program, we keep asking for their input
+        boolean quit = false;
+        int choice = 0;
+
+        printInstructions();
+        while(quit != true){
+            System.out.println("Enter your choice: ");
+            //assign choice to the scanner
+            choice = scanner.nextInt();
+            scanner.nextLine();
+            //switch statement is being used because we are only testing for one argument, so it's more efficient
+            //these correspond to the instructions
+            switch (choice){
+                case 0:
+                    printInstructions();
+                    break;
+                case 1:
+                    groceryList.printGroceryList();
+                    break;
+                case 2:
+                    addItem();
+                    break;
+                case 3:
+                    modifyItem();
+                    break;
+                case 4:
+                    removeItem();
+                    break;
+                case 5:
+                    searchItem();
+                    break;
+                case 6:
+                    quit = true;
+                    break;
+            }
+        }
+
+    }
+    //Instructions
+    public static void printInstructions(){
+        System.out.println("\nPress: ");
+        System.out.println("\t 0 - To print choice options.");
+        System.out.println("\t 1 - To print your grocery list");
+        System.out.println("\t 2 - To add an item to your list");
+        System.out.println("\t 3 - To modify an item in your list");
+        System.out.println("\t 4 - To remove an item from your list");
+        System.out.println("\t 5 - To search for an item in your list");
+        System.out.println("\t 6 - To quit the application");
+    }
+    //method to add method to the groceryList
+    //goes to the GroceryList Class and uses the addGroceryItem method to actually add it to the list
+    public static void addItem(){
+        System.out.println("Please enter the grocery Item: ");
+        groceryList.addGroceryItem(scanner.nextLine());
+
+    }
+    //method to modify an item in the groceryList
+    //we take inputs itemNumber (position) & newItem which is then sent to the GroceryList class
+    public static void modifyItem(){
+        System.out.println("Enter Item number: ");
+        int itemNumber = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter replacement Item: ");
+        String newItem = scanner.nextLine();
+        groceryList.modifyGroceryItem(itemNumber-1, newItem);
+
+    }
+    //method to remove an item from the groceryList
+    //itemNumber = position
+    //.removeItem removes it
+    public static void removeItem(){
+        System.out.println("Enter Item number: ");
+        int itemNumber = scanner.nextInt();
+        scanner.nextLine();
+        groceryList.removeItem(itemNumber);
+    }
+    //method to search an item in the groceryList
+    //searchItem is given to the method findItem in the other class
+    //if the position is found, and it exists in the arrayList, the position is returned and the item is printed
+    // if it isn't, we say the item wasn't found.
+    public static void searchItem(){
+        System.out.println("Enter Item to search: ");
+        String searchItem = scanner.nextLine();
+        if (groceryList.findItem(searchItem) != null){
+            System.out.println("Found item :" + searchItem);
+        }else{
+            System.out.println("Item not found");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
